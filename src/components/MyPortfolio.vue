@@ -19,6 +19,7 @@
         <a href="#skills" style="--i: 3">Skill</a>
         <a href="#todo-list" style="--i: 3">Todo</a>
         <a href="#contact" style="--i: 5">Contact</a>
+        <a href="#project" style="--i: 5">MyProject</a>
         <a href="#" v-show="navBar" class="fast" @click="closeNavBar"
           ><i class="i">×</i></a
         >
@@ -28,9 +29,9 @@
     <section class="home">
       <div class="home-content">
         <h3>Hello, It's Me</h3>
-        <h1>User Name</h1>
+        <h1>Limpangog Daisy A.</h1>
         <!-- <h1>Daisy A. Limpangog</h1> -->
-        <p>Web Designer</p>
+        <p>Web Designer/FrontEnd Developer</p>
 
         <div class="home-sci">
           <a
@@ -121,10 +122,14 @@
                 v-model="searchText"
                 placeholder="Search Todo..."
               />
-              <i class="bx bx-search-alt-2"></i>
+              <i class="bx bx-search-alt-2" @click="filteredTodos(index)"></i>
             </div>
           </div>
-          <div v-for="(todo, index) in todos" :key="index" class="todo-list">
+          <div
+            v-for="(todo, index) in filteredTodos"
+            :key="index"
+            class="todo-list"
+          >
             <p :class="{ completed: todo.completed }">{{ todo.text }}</p>
             <!-- <div> -->
             <i @click="toggleCompletionStatus(index)" class="bx bx-check"></i>
@@ -135,7 +140,11 @@
             ></i>
             <!-- </div> -->
           </div>
-          <div class="clear-all"><button @click="clearAll" v-if="incompleteTodosExist">Clear All</button></div>
+          <div class="clear-all">
+            <button @click="clearAll" v-if="incompleteTodosExist">
+              Clear All
+            </button>
+          </div>
 
           <div class="add-todo">
             <h1>Add New List</h1>
@@ -151,7 +160,15 @@
         </div>
       </div>
     </section>
+    <section class="project" id="Myproject">
+      <h1>Myproject</h1>
 
+      <div class="project-images">
+        <div v-for="(image, index) in projectImages" :key="index">
+          <img :src="mabes" :alt="image.alt" />
+        </div>
+      </div>
+    </section>
     <section>
       <div id="contact">
         <div class="container">
@@ -234,8 +251,8 @@
 
 <style>
 .completed {
-  text-decoration: line-through; 
-  text-align: center; 
+  text-decoration: line-through;
+  text-align: center;
 }
 </style>
 
@@ -264,15 +281,7 @@ export default {
       message: "",
       searchText: "",
       newTodo: "",
-      todos: [
-        {
-          text: "Bytewebster is a website where we create amazing",
-        },
-        {
-          text: "Digital Clok in Java Script or CSS - ByteWebster",
-        },
-        { text: "JavaScript Quiz web App using Glassmorphism - ByteWebster" },
-      ],
+      todos: [],
       skills: [
         {
           name: "HTML",
@@ -293,11 +302,27 @@ export default {
           class: "javascript",
         },
       ],
+      projectImages: [
+        {
+          url: "mabes.png",
+          alt: "Description 1",
+        },
+        {
+          url: "image_url_2.jpg",
+          alt: "Description 2",
+        },
+        // Add more images in the same format
+      ],
     };
   },
   computed: {
     incompleteTodosExist() {
       return this.todos.some((todo) => !todo.completed || todo.completed);
+    },
+    filteredTodos() {
+      return this.todos.filter((todo) =>
+        todo.text.toLowerCase().includes(this.searchText.toLowerCase())
+      );
     },
   },
   methods: {
