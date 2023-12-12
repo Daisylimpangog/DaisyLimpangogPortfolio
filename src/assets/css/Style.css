@@ -1216,32 +1216,31 @@ h1 {
   justify-content: center;
 }
 .button2 {
-  margin-left: 51rem;
+  margin-left: 51rem; /* Adjust as needed */
   cursor: pointer;
   padding: 10px 20px;
   font-size: 16px;
   color: white;
   border: none;
-  border-radius: 5px; /* Add border radius */
+  border-radius: 5px;
   transition: background-color 0.3s ease;
-  background-color: #0ef; /* Add transition for smooth animation */
+  background-color: #0ef;
 }
 
-button:hover {
-  background-color: #3498db; /* Change background color on hover */
-  color: #fff; /* Change text color on hover */
+.button2:hover {
+  background-color: #3498db;
+  color: #fff;
 }
 
 .joke {
-  width: 40rem;
-  margin-left: 35rem;
-  border: 2px solid #3498db; /* Add border to the .joke container */
-  border-radius: 5px; /* Add border radius */
-  padding: 15px; /* Add padding for better aesthetics */
-  margin-top: 20px; /* Add margin for spacing */
-  transition: border-color 0.3s ease; /* Add transition for smooth animation */
+  width: 90%; /* Adjust as needed */
+  margin: 20px auto; /* Center the .joke container and add margin */
+  border: 2px solid #3498db;
+  border-radius: 5px;
+  padding: 15px;
+  transition: border-color 0.3s ease;
 }
 
 .joke:hover {
-  border-color: #2980b9; /* Change border color on hover */
+  border-color: #2980b9;
 }
