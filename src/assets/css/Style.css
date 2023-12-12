@@ -1215,3 +1215,33 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
 }
+.button2 {
+  margin-left: 51rem;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  border: none;
+  border-radius: 5px; /* Add border radius */
+  transition: background-color 0.3s ease;
+  background-color: #0ef; /* Add transition for smooth animation */
+}
+
+button:hover {
+  background-color: #3498db; /* Change background color on hover */
+  color: #fff; /* Change text color on hover */
+}
+
+.joke {
+  width: 40rem;
+  margin-left: 35rem;
+  border: 2px solid #3498db; /* Add border to the .joke container */
+  border-radius: 5px; /* Add border radius */
+  padding: 15px; /* Add padding for better aesthetics */
+  margin-top: 20px; /* Add margin for spacing */
+  transition: border-color 0.3s ease; /* Add transition for smooth animation */
+}
+
+.joke:hover {
+  border-color: #2980b9; /* Change border color on hover */
+}

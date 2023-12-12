@@ -19,7 +19,7 @@
         <a href="#skills" style="--i: 3">Skill</a>
         <a href="#todo-list" style="--i: 3">Todo</a>
         <a href="#contact" style="--i: 5">Contact</a>
-        <a href="#project" style="--i: 5">MyProject</a>
+        <a href="#jokeapp" style="--i: 4">MyApp</a>
         <a href="#" v-show="navBar" class="fast" @click="closeNavBar"
           ><i class="i">×</i></a
         >
@@ -79,15 +79,14 @@
         <h2>About <span>Me</span></h2>
         <h4>Who I Am</h4>
         <p>
-          <!-- I am a 25-year-old male who consistently tells my teacher that I am a
+          I am a 25-year-old male who consistently tells my teacher that I am a
           girl because my name is feminine, despite my actual gender being male.
           I have a strong inclination for social interaction, enjoying meeting
           new people and forming friendships. I am sociable, frequently going
           out with friends and family. Additionally, I have a passion for
           exploring new places, with a particular affinity for nature. I also
           have a keen interest in creative activities such as video and photo
-          editing. -->
-          his info
+          editing.
         </p>
         <a href="#" class="btn-box">More About Me</a>
       </div>
@@ -160,12 +159,17 @@
         </div>
       </div>
     </section>
-    <section class="project" id="Myproject">
-      <h1>Myproject</h1>
-
-      <div class="project-images">
-        <div v-for="(image, index) in projectImages" :key="index">
-          <img :src="mabes" :alt="image.alt" />
+    <section class="jokeapp" id="jokeapp">
+      <h1>Joke Application</h1>
+      <div id="app">
+        <button class="button2" @click="fetchJoke">Get Another Joke</button>
+        <div class="joke">
+          <div v-if="joke">
+            <p>{{ joke }}</p>
+          </div>
+          <div v-else>
+            <p>Loading...</p>
+          </div>
         </div>
       </div>
     </section>
@@ -258,8 +262,6 @@
 
 <script>
 import "../assets/css/Style.css";
-
-// boxicons
 import "boxicons/css/boxicons.min.css";
 
 export default {
@@ -302,17 +304,7 @@ export default {
           class: "javascript",
         },
       ],
-      projectImages: [
-        {
-          url: "mabes.png",
-          alt: "Description 1",
-        },
-        {
-          url: "image_url_2.jpg",
-          alt: "Description 2",
-        },
-        // Add more images in the same format
-      ],
+      joke: null,
     };
   },
   computed: {
@@ -324,6 +316,9 @@ export default {
         todo.text.toLowerCase().includes(this.searchText.toLowerCase())
       );
     },
+  },
+  mounted() {
+    this.fetchJoke();
   },
   methods: {
     toggleNavBar() {
@@ -344,15 +339,24 @@ export default {
     removeTodo(index) {
       this.todos.splice(index, 1);
     },
-
     toggleCompletionStatus(index) {
       this.todos[index].completed = !this.todos[index].completed;
     },
-
     clearAll() {
       this.todos = this.todos.filter(
         (todo) => !todo.completed && todo.completed
       );
+    },
+    async fetchJoke() {
+      try {
+        const response = await fetch(
+          "https://official-joke-api.appspot.com/random_joke"
+        );
+        const data = await response.json();
+        this.joke = `${data.setup} ${data.punchline}`;
+      } catch (error) {
+        console.error("Error fetching joke:", error);
+      }
     },
   },
 };
